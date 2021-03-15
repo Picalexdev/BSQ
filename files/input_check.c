@@ -1,24 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   input_check.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apico-su <apico-su@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/15 13:05:57 by apico-su          #+#    #+#             */
-/*   Updated: 2021/03/15 13:27:43 by apico-su         ###   ########.fr       */
+/*   Created: 2021/03/15 13:13:32 by apico-su          #+#    #+#             */
+/*   Updated: 2021/03/15 13:26:07 by apico-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib.h"
 
-int		main(int argc, char *argv[])
+void	error(void)
 {
+	write(1, "Error\n", 6);
+	exit(1);
+}
+
+char	*open_file(char *filename)
+{
+	int		f;
+	int		ret;
+	int		i;
 	char	*buffer;
 
-	buffer = NULL;
-	if (argc > 2)
-		error();
-	buffer = ft_openfile(argv[1]);
-	return (0);
+	if ((buffer = malloc(BUF_SIZE)) == NULL)
+		return (0);
+	f = open(filename, O_RDONLY);
+	if (f = -1)
+	{
+		write(2, "map error\n", 10);
+	}
+	else
+	{
+		while ((ret = read(f, buffer, BUF_SIZE)))
+		{
+			buffer[ret] = '\0';
+		}
+		i = 0;
+	}
+	return (buffer);
 }
