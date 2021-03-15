@@ -6,7 +6,7 @@
 /*   By: apico-su <apico-su@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 13:13:32 by apico-su          #+#    #+#             */
-/*   Updated: 2021/03/15 13:26:07 by apico-su         ###   ########.fr       */
+/*   Updated: 2021/03/15 14:46:39 by apico-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*open_file(char *filename)
 	if ((buffer = malloc(BUF_SIZE)) == NULL)
 		return (0);
 	f = open(filename, O_RDONLY);
-	if (f = -1)
+	if (f == -1)
 	{
 		write(2, "map error\n", 10);
 	}
@@ -41,4 +41,17 @@ char	*open_file(char *filename)
 		i = 0;
 	}
 	return (buffer);
+}
+
+values determine_values(char *buff)
+{
+	int pos;
+	int x;
+
+	while (buff[pos])
+	{
+		if (buff[pos] == '\n')
+
+		pos++;
+	}
 }
