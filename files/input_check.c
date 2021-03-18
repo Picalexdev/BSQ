@@ -6,17 +6,11 @@
 /*   By: apico-su <apico-su@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 13:13:32 by apico-su          #+#    #+#             */
-/*   Updated: 2021/03/15 17:19:39 by apico-su         ###   ########.fr       */
+/*   Updated: 2021/03/18 13:35:28 by apico-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib.h"
-
-void	error(void)
-{
-	write(1, "Error\n", 6);
-	exit(1);
-}
 
 char	*open_file(char *filename)
 {
@@ -43,12 +37,12 @@ char	*open_file(char *filename)
 	return (buffer);
 }
 
-char *check_values(char *buff)
+char	*check_values(char *buff)
 {
-	int pos;
-	int x;
-	char *values;
-	char *num;
+	int		pos;
+	int		x;
+	char	*values;
+	char	*num;
 
 	values = malloc(4);
 	pos = 0;
@@ -72,34 +66,71 @@ char *check_values(char *buff)
 	return (values);
 }
 
-char **create_table(char *buffer)
+void	populate_table(char **table, char *buffer)
 {
-	char **table;
 	int pos;
 	int x;
 	int y;
 
-	table = NULL;
+	y = 0;
+	x = 0;
 	pos = 0;
+	while (buffer[pos])
+	{
+		if (buffer[pos] == '\n')
+		{
+			table[y][x] = 0;
+			y++;
+			x = -1;
+		}
+		else
+			table[y][x] = buffer[pos];
+		x++;
+		pos++;
+	}
+	free(table);
+}
+
+int		ft_mapwidth(char *buffer)
+{
+	int i;
+	int count;
+
+	i = 0;
+	while (buffer[i] != '\n')
+	{
+		i++;
+	}
+	i++;
+	count = 0;
+	while (buffer[i] != '\n')
+	{
+		count++;
+		i++;
+	}
+	return (count);
+}
+
+char	**create_table(char *buffer)
+{
+	char	**table;
+	int		x;
+	int		y;
+	int		z;
+
+	table = (char **)malloc(BUF_SIZE);
 	x = 0;
 	y = 0;
-	printf("%s", buffer);
-	while (buffer[pos] != '\n')
-		pos++;
-	pos++;
-	printf("%d", pos);
-	while (buffer[pos + 1])
+	z = ft_mapwidth(buffer);
+	while (buffer[x])
 	{
-		if (buffer[pos] != '\n')
-			table[y][x] = buffer[pos];
-		else
+		if (buffer[x] == '\n')
 		{
-			x = -1;
+			table[y] = (char *)malloc(z);
 			y++;
 		}
-		printf("%s", table[1]);
-		pos++;
 		x++;
 	}
+	populate_table(table, buffer);
 	return (table);
 }

@@ -6,7 +6,7 @@
 /*   By: apico-su <apico-su@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 13:20:30 by apico-su          #+#    #+#             */
-/*   Updated: 2021/03/15 16:15:30 by apico-su         ###   ########.fr       */
+/*   Updated: 2021/03/18 12:36:55 by apico-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,6 @@ struct	s_size
 	int y;
 } size;
 
-/*struct	s_values
-{
-	char vacio;
-	char obstaculo;
-	char lleno;
-} values;*/
-
 int		ft_strlen(char *str);
 void	ft_putstr(char *str);
 void	ft_putchar(char c);
@@ -41,5 +34,8 @@ char	*ft_mallmatrix(int **matrix, int row, int col);
 char	*open_file(char *filename);
 char	*check_values(char *buff);
 char	**create_table(char *buffer);
+int		*solver_call(char **table, int line_num, char obst);
+void	ft_fill(char **table, int *tab);
+void	write_tabl(char **table);
 void	error();
 #endif
